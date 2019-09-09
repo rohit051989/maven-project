@@ -27,13 +27,13 @@ stages{
             parallel{
                 stage ('Deploy to Staging'){
                     steps {
-                        sh "scp -i \"C:/TCP/initiative/devops/aws/ec2/jenkins-demo.pem\" **/target/*.war ec2-user@${params.tomcat_dev}:/home/ec2-user/apache-tomcat-9.0.24/webapps"
+                        sh "scp -i "C:/TCP/initiative/devops/aws/ec2/jenkins-demo.pem" **/target/*.war ec2-user@${params.tomcat_dev}:/home/ec2-user/apache-tomcat-9.0.24/webapps"
                     }
                 }
 
                 stage ("Deploy to Production"){
                     steps {
-                        sh "scp -i \"C:/TCP/initiative/devops/aws/ec2/jenkins-demo.pem\" **/target/*.war ec2-user@${params.tomcat_prod}:/home/ec2-user/apache-tomcat-9.0.24/webapps"
+                        sh "scp -i "C:/TCP/initiative/devops/aws/ec2/jenkins-demo.pem" **/target/*.war ec2-user@${params.tomcat_prod}:/home/ec2-user/apache-tomcat-9.0.24/webapps"
                     }
                 }
             }
