@@ -2,8 +2,8 @@ pipeline {
     agent any
 
     parameters {
-         string(name: 'tomcat_dev', defaultValue: '54.234.107.182', description: 'Staging Server')
-         string(name: 'tomcat_prod', defaultValue: '18.209.15.51', description: 'Production Server')
+         string(name: 'tomcat_dev', defaultValue: 'ec2-54-234-107-182.compute-1.amazonaws.com', description: 'Staging Server')
+         string(name: 'tomcat_prod', defaultValue: 'ec2-user@ec2-18-209-15-51.compute-1.amazonaws.com', description: 'Production Server')
     }
 
     triggers {
@@ -27,13 +27,13 @@ stages{
             parallel{
                 stage ('Deploy to Staging'){
                     steps {
-                        sh "scp -i "C:/TCP/initiative/devops/aws/ec2/jenkins-demo.pem" **/target/*.war ec2-user@${params.tomcat_dev}:/home/ec2-user/apache-tomcat-9.0.24/webapps"
+                        sh "scp -i C:/TCP/initiative/devops/aws/ec2/jenkins-demo.pem **/target/*.war ec2-user@${params.tomcat_dev}:/home/ec2-user/apache-tomcat-9.0.24/webapps"
                     }
                 }
 
                 stage ("Deploy to Production"){
                     steps {
-                        sh "scp -i "C:/TCP/initiative/devops/aws/ec2/jenkins-demo.pem" **/target/*.war ec2-user@${params.tomcat_prod}:/home/ec2-user/apache-tomcat-9.0.24/webapps"
+                        sh "scp -i C:/TCP/initiative/devops/aws/ec2/jenkins-demo.pem **/target/*.war ec2-user@${params.tomcat_prod}:/home/ec2-user/apache-tomcat-9.0.24/webapps"
                     }
                 }
             }
