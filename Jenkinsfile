@@ -27,13 +27,13 @@ stages{
             parallel{
                 stage ('Deploy to Staging'){
                     steps {
-                        bat "winscp -i /c/TCP/initiative/devops/aws/ec2/jenkins-demo.pem **/target/*.war ec2-user@${params.tomcat_dev}:/home/ec2-user/apache-tomcat-9.0.24/webapps"
+                        bat "echo y|pscp -i \"C:\TCP\initiative\devops\aws\ec2\jenkins-demo.pem\" \"C:\Users\rohkhann\Desktop\test.txt\" ec2-user@ec2-34-229-84-166.compute-1.amazonaws.com:/tmp"
                     }
                 }
  
                 stage ("Deploy to Production"){
                     steps {
-                        bat "winscp -i /c/TCP/initiative/devops/aws/ec2/jenkins-demo.pem **/target/*.war ec2-user@${params.tomcat_prod}:/home/ec2-user/apache-tomcat-9.0.24/webapps"
+                        bat "echo y|pscp -i \"C:\TCP\initiative\devops\aws\ec2\jenkins-demo.pem\" \"C:\Users\rohkhann\Desktop\test.txt\" ec2-user@ec2-3-80-56-253.compute-1.amazonaws.com:/tmp"
                     }
                 }
             }
