@@ -27,7 +27,7 @@ stages{
             parallel{
                 stage ('Deploy to Staging'){
                     steps {
-                        bat "echo y | pscp -i C:/TCP/initiative/devops/aws/ec2/jenkins-demo2.ppk C:/Program Files (x86)/Jenkins/workspace/FullyAutomatedPipelineAsCode/webapp/target/webapp.war ec2-user@${params.tomcat_dev}:/tmp"
+                        bat "echo y | pscp -i C:/TCP/initiative/devops/aws/ec2/jenkins-demo2.ppk \"C:/Program Files (x86)/Jenkins/workspace/FullyAutomatedPipelineAsCode/webapp/target/webapp.war\" ec2-user@${params.tomcat_dev}:/tmp"
                     }
                 }
  
