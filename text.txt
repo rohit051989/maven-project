@@ -1,0 +1,4 @@
+cd D:\mp\platform\backend
+.venv\Scripts\python.exe --version
+.venv\Scripts\python.exe -m pip show pydantic pydantic-core | Select-String "^Name|^Version"
+Get-Content D:\mp\stage7.log -Tail 25
