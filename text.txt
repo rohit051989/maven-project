@@ -2,3 +2,22 @@ cd D:\mp\platform\backend
 .venv\Scripts\python.exe --version
 .venv\Scripts\python.exe -m pip show pydantic pydantic-core | Select-String "^Name|^Version"
 Get-Content D:\mp\stage7.log -Tail 25
+
+dotnet new console -o $env:TEMP\t1 --force
+dotnet build $env:TEMP\t1 -p:UseAppHost=false
+dotnet build $env:TEMP\t1
+& "$env:TEMP\t1\bin\Debug\net10.0\t1.exe"
+dotnet "$env:TEMP\t1\bin\Debug\net10.0\t1.dll"
+
+#	What it does
+1	Creates a tiny test program
+2	Builds it without creating a launcher .exe
+3	Builds it with a launcher .exe — what stage 6 did
+4	Runs that new launcher
+5	Runs the same program through dotnet.exe instead
+What the results would mean
+Pop-ups on	Meaning	Fix
+Every command, even 1 and 2	dotnet.exe itself is flagged, whatever it does	The software management team — something about the installation isn’t recognised as approved
+3 and 4, but not 2 or 5	Creating or running new launchers triggers it — my suspect	Platform side: publish without launchers, run through dotnet.exe. Easy to change
+Only 4	Only running a new launcher triggers it	The same platform fix
+None at all	Something about how bootstrap starts dotnet	We dig into the bootstrap’s call next
