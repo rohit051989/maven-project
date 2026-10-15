@@ -9,6 +9,12 @@ dotnet build $env:TEMP\t1
 & "$env:TEMP\t1\bin\Debug\net10.0\t1.exe"
 dotnet "$env:TEMP\t1\bin\Debug\net10.0\t1.dll"
 
+dotnet build-server shutdown
+dotnet build $env:TEMP\t1
+
+dotnet build-server shutdown
+dotnet build $env:TEMP\t1 -m:1 -nodeReuse:false -p:UseSharedCompilation=false
+
 #	What it does
 1	Creates a tiny test program
 2	Builds it without creating a launcher .exe
