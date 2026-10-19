@@ -1,3 +1,17 @@
+Follow-up, still diagnose only, and still no source code. Describe two patterns in generic
+form, with every identifier replaced by a placeholder:
+
+1. The member with 16 assignments in AOWorkFlowQueueClient: what kind of member it is
+   (field, property, local), and the general shape of the assignments that read it back —
+   for example "_x = _x + y" inside a loop, or "_x = Combine(_x, y)".
+
+2. The invocation in MarketCloud whose operation has an empty reason: what kind of call it
+   is — HttpClient, WCF proxy, ChannelFactory, something else — and how its target or
+   operation is expressed, in the same generic form.
+
+Enough detail for someone to write a small test file that reproduces each pattern, without
+any of the real code.
+
 cd D:\mp\platform\backend
 .venv\Scripts\python.exe --version
 .venv\Scripts\python.exe -m pip show pydantic pydantic-core | Select-String "^Name|^Version"
