@@ -1,3 +1,11 @@
+$runs = "C:\MP\runs"
+Get-ChildItem $runs -Recurse -File |
+  Where-Object FullName -match '\\out\\' |
+  Group-Object { ($_.FullName.Substring($runs.Length + 1) -split '\\')[0..2] -join '\' } |
+  ForEach-Object { [pscustomobject]@{ Scan = $_.Name; MB = [math]::Round(($_.Group | Measure-Object Length -Sum).Sum / 1MB, 1) } } |
+  Sort-Object MB -Descending | Select-Object -First 10
+
+
 & "${env:ProgramFiles(x86)}\Microsoft Visual Studio\Installer\vswhere.exe" -all -prerelease
 
 powershell -ExecutionPolicy Bypass -File C:\<repo_name>\MP\scripts\update-platform.ps1 -Source <source> -Platform C:\<repo_name>\MP -Branch <your-branch> -Push
